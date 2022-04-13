@@ -14,14 +14,15 @@
 # * See the License for the specific language governing permissions and
 # * limitations under the License.
 
+from __future__ import print_function, unicode_literals, absolute_import, division
+
+
 __author__ = "WSH Munirah W Ahmad <wshmunirah@gmail.com>"
 __copyright__ = "Apache 2 license. Made by Multimedia University Cytomine Team, Cyberjaya, Malaysia, http://cytomine.mmu.edu.my/"
 __version__ = "1.0.0"
 
 # Date created: 12 April 2022
 # Date created (terminal): 04 April 2022
-
-from __future__ import print_function, unicode_literals, absolute_import, division
 
 import sys
 import numpy as np
