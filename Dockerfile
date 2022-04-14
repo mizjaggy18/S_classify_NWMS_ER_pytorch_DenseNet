@@ -23,13 +23,13 @@ RUN pip install numpy
 RUN pip install shapely
 # RUN pip install tifffile
 
-# RUN mkdir -p /models 
-# ADD weights.best_v10b_100ep_cc_LR_01val.h5 /models/weights.best_v10b_100ep_cc_LR_01val.h5
-# RUN chmod 444 /models/weights.best_v10b_100ep_cc_LR_01val.h5
+RUN mkdir -p /models 
+ADD 3333nuclei_densenet_best_model_100ep.pth /models/3333nuclei_densenet_best_model_100ep.pth
+RUN chmod 444 /models/3333nuclei_densenet_best_model_100ep.pth
 
 
 RUN mkdir -p /app
-ADD 3333nuclei_densenet_best_model_100ep.pth /app/3333nuclei_densenet_best_model_100ep.pth
+# ADD 3333nuclei_densenet_best_model_100ep.pth /app/3333nuclei_densenet_best_model_100ep.pth
 ADD descriptor.json /app/descriptor.json
 ADD nwms_pytorchdensenet.py /app/nwms_pytorchdensenet.py
 
