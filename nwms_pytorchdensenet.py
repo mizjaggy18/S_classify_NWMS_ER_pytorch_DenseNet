@@ -135,7 +135,7 @@ def run(cyto_job, parameters):
             print('Current image:', id_image)
             roi_annotations = AnnotationCollection()
             roi_annotations.project = project.id
-            roi_annotations.term = parameters.cytomine_id_cell_term
+#             roi_annotations.term = parameters.cytomine_id_cell_term
             roi_annotations.image = id_image #conn.parameters.cytomine_id_image
             roi_annotations.job = parameters.cytomine_id_annotation_job
             roi_annotations.user = parameters.cytomine_id_user_job
