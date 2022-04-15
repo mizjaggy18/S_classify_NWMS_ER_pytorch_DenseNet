@@ -125,7 +125,7 @@ def run(cyto_job, parameters):
         output_path = os.path.join(working_path, "densenet_results.csv")
         f= open(output_path,"w+")
         #Go over images
-        job.update(status=Job.RUNNING, progress=20, statusComment="Running DenseNet201 classification on image...")
+        job.update(status=Job.RUNNING, progress=20, statusComment="Running DenseNet classification on image...")
         #for id_image in conn.monitor(list_imgs, prefix="Running PN classification on image", period=0.1):
         
         #Go over images
@@ -162,7 +162,8 @@ def run(cyto_job, parameters):
             roi_numel=len(roi_annotations)
             x=range(1,roi_numel)
             increment=np.multiply(10000,x)
-
+            
+            print("----------------------------Classsifying Nucleus------------------------------")
             # --- run all nuclei for a job -----------
             for i, roi in enumerate(roi_annotations):
             # ----------------------------------------
@@ -177,8 +178,8 @@ def run(cyto_job, parameters):
             #     roi=roi_annotations[j]
             # ----------------------------------------
                 
-                print(i)
-                print(roi)
+#                 print(i)
+#                 print(roi)
                 for inc in increment:
                     if i==inc:
                         shutil.rmtree(roi_path, ignore_errors=True)
@@ -188,7 +189,7 @@ def run(cyto_job, parameters):
 
                 #Get Cytomine ROI coordinates for remapping to whole-slide
                 #Cytomine cartesian coordinate system, (0,0) is bottom left corner                
-                print("----------------------------Classsifying Nucleus------------------------------")
+#                 print("----------------------------Classsifying Nucleus------------------------------")
                 roi_geometry = wkt.loads(roi.location)
                 # print("ROI Geometry from Shapely: {}".format(roi_geometry))
                 # print("ROI Bounds")
@@ -219,7 +220,7 @@ def run(cyto_job, parameters):
                 # print(output)
                 # print(output_batch)
                 # print(type(pred_labels))
-                print(pred_labels)
+#                 print(pred_labels)
                 # print(pred_all)
 
                 if pred_labels[0]==0:
@@ -267,7 +268,7 @@ def run(cyto_job, parameters):
                 cytomine_annotations.showTerm = True
                 cytomine_annotations.annotation = True
                 cytomine_annotations.fetch()
-                print(cytomine_annotations)
+#                 print(cytomine_annotations)
 
 
             for annotation in cytomine_annotations:
