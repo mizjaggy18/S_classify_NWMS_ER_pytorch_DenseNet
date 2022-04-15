@@ -246,10 +246,7 @@ def run(cyto_job, parameters):
 
 
                 cytomine_annotations = AnnotationCollection()
-
                 annotation=roi_geometry
-
-
                 cytomine_annotations.append(Annotation(location=annotation.wkt,#location=roi_geometry,
                                                        id_image=id_image,#conn.parameters.cytomine_id_image,
                                                        id_project=project.id,
@@ -270,12 +267,13 @@ def run(cyto_job, parameters):
                 cytomine_annotations.fetch()
 #                 print(cytomine_annotations)
 
-
+            job.update(status=Job.RUNNING, progress=80, statusComment="Writing classification results on CSV...")
             for annotation in cytomine_annotations:
                 # print(annotation.id)
                 # f.write("{};{};{};{};{};{};{};{}\n".format(annotation.id,annotation.image,annotation.project,annotation.term,annotation.user,annotation.area,annotation.perimeter,annotation.location))
                 f.write("{};{};{};{};{};{};{};{};{}\n".format(annotation.id,annotation.image,annotation.project,job.id,annotation.term,annotation.user,annotation.area,annotation.perimeter,annotation.location))
- 
+            
+            job.update(status=Job.RUNNING, progress=90, statusComment="Generating scoring for whole-slide image(s)...")
             pred_all=[pred_c0, pred_c1, pred_c2, pred_c3]
             pred_positive_all=[pred_c1, pred_c2, pred_c3]
             print("pred_all:", pred_all)
@@ -329,6 +327,8 @@ def run(cyto_job, parameters):
         f.write("{};{};{};{};{};{};{};{};{};{};{};{};{};{}\n".format(im_pred,pred_c0,pred_c1,pred_c2,pred_c3,pred_total,pred_positive,np.argmax(pred_positive_all),pred_positive_100,proportion_score,intensity_score,allred_score,end_time-start_time,end_time-start_prediction_time))
         
         f.close()
+        
+        job.update(status=Job.RUNNING, progress=99, statusComment="Summarizing results...")
         job_data = JobData(job.id, "Generated File", "densenet_results.csv").save()
         job_data.upload(output_path)
 
