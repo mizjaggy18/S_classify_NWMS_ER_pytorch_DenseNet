@@ -77,6 +77,7 @@ def run(cyto_job, parameters):
     gpuid = 0
 
     device = torch.device(gpuid if gpuid!=-2 and torch.cuda.is_available() else 'cpu')
+    print("Device: ", device)
 
     checkpoint = torch.load(model, map_location=lambda storage, loc: storage) #load checkpoint to CPU and then put to device https://discuss.pytorch.org/t/saving-and-loading-torch-models-on-2-machines-with-different-number-of-gpu-devices/6666
 
