@@ -57,7 +57,7 @@ __author__ = "WSH Munirah W Ahmad <wshmunirah@gmail.com>"
 __version__ = "1.0.1"
 
 def run(cyto_job, parameters):
-    logging.info("----- test software v%s -----", __version__)
+    logging.info("----- classify_NWMS_ER_pytorch_DenseNet v%s -----", __version__)
     logging.info("Entering run(cyto_job=%s, parameters=%s)", cyto_job, parameters)
 
     job = cyto_job.job
